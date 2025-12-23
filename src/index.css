@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* FORCE HIDE SCROLLBARS ON EVERYTHING */
+* {
+  font-family: "Manrope", sans-serif;
+  font-weight: 500;
+  scrollbar-width: none !important;
+  /* Firefox */
+  -ms-overflow-style: none !important;
+  /* IE and Edge */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera globally */
+*::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* Standard Scroll Behavior - Fixes Lag */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  /* Performance optimizations */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Theme colors - Restoring Tailwind Config */
+@theme {
+  --color-primary: #5044E5;
+  --color-primary-light: #4d8cea;
+  --gradient-primary: linear-gradient(to right, #5044E5, #4d8cea);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 0% center;
+  }
+
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes gooey {
+
+  0%,
+  100% {
+    background-position: 0% 50%;
+    filter: hue-rotate(0deg) blur(0px);
+  }
+
+  25% {
+    background-position: 50% 50%;
+    filter: hue-rotate(10deg) blur(0.5px);
+  }
+
+  50% {
+    background-position: 100% 50%;
+    filter: hue-rotate(0deg) blur(1px);
+  }
+
+  75% {
+    background-position: 50% 50%;
+    filter: hue-rotate(-10deg) blur(0.5px);
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-shimmer {
+  animation: gooey 4s ease-in-out infinite;
+}
+
+.animate-gooey {
+  animation: gooey 4s ease-in-out infinite;
+}
+
+.animate-float {
+  animation: float 2s ease-in-out infinite;
+}
