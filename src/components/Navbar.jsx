@@ -286,7 +286,12 @@ const Navbar = ({ theme, setTheme, setShowProducts, setShowContact, setShowToolS
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.95, opacity: 0, y: 10 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className='relative w-[340px] p-6 rounded-[2.5rem] bg-white/70 dark:bg-black/60 backdrop-blur-2xl backdrop-saturate-150 border border-white/50 dark:border-white/20 shadow-2xl overflow-hidden'
+              className='relative w-[340px] p-6 rounded-[2.5rem] 
+                         bg-white/90 dark:bg-gray-900/90 
+                         backdrop-blur-2xl backdrop-saturate-200 
+                         border border-gray-300/30 dark:border-white/10 
+                         shadow-lg shadow-black/5 dark:shadow-black/20 
+                         overflow-hidden'
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
