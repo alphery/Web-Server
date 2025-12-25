@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+/* Premium Inter Font - Apple SF Pro Alternative */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 @import "tailwindcss";
 
@@ -6,8 +7,13 @@
 
 /* FORCE HIDE SCROLLBARS ON EVERYTHING */
 * {
-  font-family: "Manrope", sans-serif;
-  font-weight: 500;
+  /* Premium font stack - SF Pro on Apple devices, Inter elsewhere */
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 400;
+  /* Enable font feature settings for better readability */
+  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   scrollbar-width: none !important;
   /* Firefox */
   -ms-overflow-style: none !important;
@@ -52,6 +58,17 @@ body {
   --color-primary: #5044E5;
   --color-primary-light: #4d8cea;
   --gradient-primary: linear-gradient(to right, #5044E5, #4d8cea);
+}
+
+/* Glassmorphism Utilities */
+.backdrop-saturate-150 {
+  backdrop-filter: saturate(150%);
+  -webkit-backdrop-filter: saturate(150%);
+}
+
+.backdrop-saturate-200 {
+  backdrop-filter: saturate(200%);
+  -webkit-backdrop-filter: saturate(200%);
 }
 
 @keyframes shimmer {

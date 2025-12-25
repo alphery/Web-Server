@@ -63,43 +63,215 @@ const Navbar = ({ theme, setTheme, setShowProducts, setShowContact, setShowToolS
 
   return (
     <>
+      {/* Premium Glassmorphism Navbar */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, ease: 'easeOut' }}
-        className={`flex justify-between items-center px-4 sm:px-12 lg:px-24 xl:px-40 py-4 fixed top-0 left-0 right-0 z-20 backdrop-blur-md font-medium shadow-sm dark:shadow-none transition-colors duration-300 ${showQuboAI ? 'bg-transparent shadow-none text-white' : 'bg-white/95 dark:bg-black'}`}>
+        transition={{ duration: 0.5, ease: 'easeOut' }}
+        className="fixed top-0 left-0 right-0 z-50 px-4 sm:px-6 pt-4"
+      >
+        {/* Navbar Container with Enhanced Frosty Glass Effect */}
+        <div className={`
+          mx-auto max-w-6xl
+          rounded-full
+          ${showQuboAI
+            ? 'bg-white/10 dark:bg-black/20 border border-white/20'
+            : 'bg-white/90 dark:bg-gray-900/90 border border-gray-300/30 dark:border-white/10'
+          }
+          backdrop-blur-2xl backdrop-saturate-200
+          shadow-lg shadow-black/5 dark:shadow-black/20
+          transition-all duration-300
+        `}>
+          <div className="flex justify-between items-center px-6 lg:px-8 py-3">
 
-        <img
-          src={theme === 'dark' ? assets.logo_dark || 'https://via.placeholder.com/150' : assets.logo}
-          className='w-24 sm:w-32'
-          alt='Logo'
-        />
+            {/* Logo */}
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              transition={{ duration: 0.2 }}
+              className="flex items-center flex-shrink-0"
+            >
+              <img
+                src={theme === 'dark' ? assets.logo_dark || 'https://via.placeholder.com/150' : assets.logo}
+                className='h-7 w-auto'
+                alt='Logo'
+              />
+            </motion.div>
 
-        <div className={`text-gray-700 dark:text-white sm:text-sm ${!sidebarOpen ? 'max-sm:w-0 overflow-hidden' : 'max-sm:w-60 max-sm:pl-10'} max-sm:fixed top-0 bottom-0 right-0 max-sm:min-h-screen max-sm:h-full max-sm:flex-col max-sm:bg-primary max-sm:text-white max-sm:pt-20 flex sm:items-center gap-8 transition-all`}>
+            {/* Desktop Navigation Links */}
+            <nav className='hidden lg:flex items-center gap-1'>
+              {[
+                { id: 'hero', label: 'Home', page: 'home' },
+                { id: 'services', label: 'Services', page: 'services' },
+                { id: 'products', label: 'Products', page: 'products' },
+                { id: 'tool-space', label: 'Tool Space', page: 'tool-space' },
+                { id: 'qubo-ai', label: 'Alphery AI', page: 'qubo-ai' },
+              ].map((item) => (
+                <a
+                  key={item.id}
+                  onClick={() => handleNavigation(item.id)}
+                  className={`
+                    relative px-4 py-2 text-sm font-medium cursor-pointer rounded-lg
+                    inline-flex items-center h-10
+                    transition-all duration-200
+                    ${showQuboAI
+                      ? 'text-white hover:text-white/80 hover:bg-white/10'
+                      : activePage === item.page
+                        ? 'text-primary dark:text-primary-light'
+                        : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100/50 dark:text-gray-300 dark:hover:text-white dark:hover:bg-white/5'
+                    }
+                    ${activePage === item.page && !showQuboAI ? 'after:absolute after:bottom-1 after:left-1/2 after:-translate-x-1/2 after:w-1 after:h-1 after:rounded-full after:bg-primary dark:after:bg-primary-light' : ''}
+                  `}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
 
-          <img src={assets.close_icon} alt="" className='w-5 absolute right-4 top-4 sm:hidden' onClick={() => setSidebarOpen(false)} />
+            {/* Right Section - Theme Toggle & CTA */}
+            <div className='flex items-center gap-2'>
 
-          <a onClick={() => handleNavigation('hero')} href="#" className={`sm:hover:border-b cursor-pointer transition-all ${activePage === 'home' ? 'border-b-2 border-primary' : ''}`}>Home</a>
-          <a onClick={() => handleNavigation('services')} className={`sm:hover:border-b cursor-pointer transition-all ${activePage === 'services' ? 'border-b-2 border-primary' : ''}`}>Services</a>
-          <a onClick={() => handleNavigation('products')} className={`sm:hover:border-b cursor-pointer transition-all ${activePage === 'products' ? 'border-b-2 border-primary' : ''}`}>Products</a>
-          <a onClick={() => handleNavigation('tool-space')} className={`sm:hover:border-b cursor-pointer transition-all ${activePage === 'tool-space' ? 'border-b-2 border-primary' : ''}`}>Tool Space</a>
-          <a onClick={() => handleNavigation('qubo-ai')} className={`sm:hover:border-b cursor-pointer transition-all ${activePage === 'alphery-ai' ? 'border-b-2 border-primary' : ''}`}>Alphery Ai</a>
-          <a onClick={() => setPopupOpen(true)} className='sm:hidden cursor-pointer'>Contact us</a>
-        </div>
+              {/* Theme Toggle - Desktop Only */}
+              <div className='hidden sm:flex items-center h-10'>
+                <ThemeToggleBtn theme={theme} setTheme={setTheme} />
+              </div>
 
-        <div className='flex items-center gap-2 sm:gap-4'>
+              {/* Premium CTA Button - Desktop */}
+              <motion.button
+                onClick={() => setPopupOpen(true)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className={`
+                  hidden lg:flex items-center gap-2 
+                  px-5 h-10 rounded-full
+                  text-sm font-semibold
+                  transition-all duration-300
+                  ${showQuboAI
+                    ? 'bg-white text-gray-900 hover:bg-gray-100'
+                    : 'bg-gray-900 text-white hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100'
+                  }
+                  shadow-md hover:shadow-lg
+                `}
+              >
+                Get Started
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </motion.button>
 
-          <ThemeToggleBtn theme={theme} setTheme={setTheme} />
-
-          <img src={theme === 'dark' ? assets.menu_icon_dark : assets.menu_icon} alt="" onClick={() => setSidebarOpen(true)} className='w-8 sm:hidden' />
-
-          <button
-            onClick={() => setPopupOpen(true)}
-            className='text-sm max-sm:hidden flex items-center gap-2 bg-gradient-to-r from-[#5044E5] to-[#4d8cea] text-white px-6 py-2 rounded-full cursor-pointer hover:scale-103 transition-all'>
-            Contact us <img src={assets.arrow_icon} width={14} alt="" />
-          </button>
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setSidebarOpen(true)}
+                className="lg:hidden p-2 rounded-lg hover:bg-gray-100/50 dark:hover:bg-white/5 transition-colors"
+                aria-label="Open menu"
+              >
+                <svg
+                  className={`w-6 h-6 ${showQuboAI ? 'text-white' : 'text-gray-700 dark:text-gray-300'}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
       </motion.div>
+
+      {/* Premium Mobile Sidebar */}
+      <AnimatePresence>
+        {sidebarOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setSidebarOpen(false)}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+            />
+
+            {/* Sidebar Panel */}
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+              className="fixed top-0 right-0 bottom-0 w-80 bg-white dark:bg-gray-900 shadow-2xl z-50 lg:hidden overflow-y-auto"
+            >
+              {/* Sidebar Header */}
+              <div className="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-800">
+                <img
+                  src={theme === 'dark' ? assets.logo_dark : assets.logo}
+                  className='h-8 w-auto'
+                  alt='Logo'
+                />
+                <button
+                  onClick={() => setSidebarOpen(false)}
+                  className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+                  aria-label="Close menu"
+                >
+                  <svg className="w-6 h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              {/* Sidebar Navigation */}
+              <nav className="p-6 space-y-2">
+                {[
+                  { id: 'hero', label: 'Home', page: 'home' },
+                  { id: 'services', label: 'Services', page: 'services' },
+                  { id: 'products', label: 'Products', page: 'products' },
+                  { id: 'tool-space', label: 'Tool Space', page: 'tool-space' },
+                  { id: 'qubo-ai', label: 'Alphery AI', page: 'qubo-ai' },
+                ].map((item) => (
+                  <a
+                    key={item.id}
+                    onClick={() => handleNavigation(item.id)}
+                    className={`
+                      block px-4 py-3 rounded-lg font-medium cursor-pointer
+                      transition-all duration-200
+                      ${activePage === item.page
+                        ? 'bg-primary text-white'
+                        : 'text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800'
+                      }
+                    `}
+                  >
+                    {item.label}
+                  </a>
+                ))}
+              </nav>
+
+              {/* Sidebar Footer */}
+              <div className="p-6 space-y-4 border-t border-gray-200 dark:border-gray-800">
+                {/* Theme Toggle */}
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Theme</span>
+                  <ThemeToggleBtn theme={theme} setTheme={setTheme} />
+                </div>
+
+                {/* Mobile CTA */}
+                <button
+                  onClick={() => {
+                    setSidebarOpen(false);
+                    setPopupOpen(true);
+                  }}
+                  className="w-full px-5 py-3 rounded-lg bg-gray-900 text-white dark:bg-white dark:text-gray-900 font-semibold hover:opacity-90 transition-opacity"
+                >
+                  Get Started
+                </button>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       {/* Popup Container */}
       {/* Popup Container */}
