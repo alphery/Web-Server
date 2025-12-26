@@ -16,7 +16,7 @@ const Loader = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length)
-    }, 1000) // Change slide every 1 second
+    }, 800) // Change slide every 0.8 seconds
 
     return () => clearInterval(interval)
   }, [])
@@ -52,7 +52,7 @@ const Loader = () => {
               scale: 1.1
             }}
             transition={{
-              duration: 1.2,
+              duration: 0.9,
               ease: [0.16, 1, 0.3, 1] // Apple-style ease-out
             }}
             className='slide-image'
