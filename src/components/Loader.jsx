@@ -1,38 +1,65 @@
-import React from 'react'
-import { motion } from 'motion/react'
-import './AlpheriLoader.css'
+import React, { useState, useEffect } from 'react'
+import { motion, AnimatePresence } from 'motion/react'
+import './Loader.css'
 
 const Loader = () => {
+  const [currentSlide, setCurrentSlide] = useState(0)
+
+  const slides = [
+    { src: '/alphery.png', alt: 'Alphery' },
+    { src: '/alphery-ai.png', alt: 'Alphery AI' },
+    { src: '/alphery-space.png', alt: 'Alphery Space' },
+    { src: '/alphery-os.png', alt: 'Alphery OS' },
+    { src: '/alphery-com.png', alt: 'Alphery.com' }
+  ]
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % slides.length)
+    }, 1000) // Change slide every 1 second
+
+    return () => clearInterval(interval)
+  }, [])
+
+  // Alternate direction: even slides from left, odd slides from right
+  const isFromLeft = currentSlide % 2 === 0
+
   return (
-    <motion.div
-      initial={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.5 }}
-      className='fixed inset-0 z-50 flex items-center justify-center'
-      style={{ backgroundColor: '#F9FAFA' }}
-    >
-      <div className='alpheri-loader-container'>
-        {/* The word container with the orbiting dot */}
-        <div className='alpheri-word-wrapper'>
-          {/* Main text */}
-          <span className='alpheri-letter alpheri-purple'>A</span>
-          <span className='alpheri-letter'>l</span>
-          <span className='alpheri-letter'>p</span>
-          <span className='alpheri-letter'>h</span>
-          <span className='alpheri-letter'>e</span>
-          <span className='alpheri-letter'>r</span>
-          <span className='alpheri-letter'>y</span>
-          <span className='alpheri-letter'>&nbsp;</span>
-          <span className='alpheri-letter alpheri-purple'>A</span>
-          <span className='alpheri-letter alpheri-i-container'>
-            <span className='alpheri-i-stem'>ı</span>
-            <span className='alpheri-dot-placeholder'></span>
-            {/* The orbiting dot - Moved inside i-container for precise starting position */}
-            <div className='alpheri-orbiting-dot'></div>
-          </span>
-        </div>
+    <div className='loader-container'>
+      {/* Slide container */}
+      <div className='slide-wrapper'>
+        <AnimatePresence>
+          <motion.img
+            key={currentSlide}
+            src={slides[currentSlide].src}
+            alt={slides[currentSlide].alt}
+            initial={{
+              x: isFromLeft ? '-100%' : '100%',
+              opacity: 0,
+              filter: 'blur(10px)',
+              scale: 0.9
+            }}
+            animate={{
+              x: 0,
+              opacity: 1,
+              filter: 'blur(0px)',
+              scale: 1
+            }}
+            exit={{
+              x: isFromLeft ? '100%' : '-100%',
+              opacity: 0,
+              filter: 'blur(10px)',
+              scale: 1.1
+            }}
+            transition={{
+              duration: 1.2,
+              ease: [0.16, 1, 0.3, 1] // Apple-style ease-out
+            }}
+            className='slide-image'
+          />
+        </AnimatePresence>
       </div>
-    </motion.div>
+    </div>
   )
 }
 

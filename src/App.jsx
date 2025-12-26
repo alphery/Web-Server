@@ -49,10 +49,10 @@ const App = () => {
   const position = useRef({ x: 0, y: 0 })
 
   useEffect(() => {
-    // Loader timeout extended to 4.5s to finish animation cycle
+    // Loader timeout set to 5s to show all 5 slides (1s each)
     const timer = setTimeout(() => {
       setLoading(false)
-    }, 4500)
+    }, 5000)
 
     return () => clearTimeout(timer)
   }, [])
