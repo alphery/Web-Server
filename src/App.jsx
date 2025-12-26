@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, Suspense } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import TrustedBy from './components/TrustedBy'
@@ -9,14 +9,15 @@ import ContactUs from './components/ContactUs'
 import { Toaster } from 'react-hot-toast'
 import Footer from './components/Footer'
 import Loader from './components/Loader'
-import Products from './components/Products'
-import ToolSpace from './components/ToolSpace'
 import { motion } from 'motion/react'
 import Launcher from './components/Launcher'
 
 
-import OurProjects from './components/OurProjects'
-import QuboAIPage from './components/QuboAI/QuboAIPage'
+// Lazy Load Heavy Components
+const Products = React.lazy(() => import('./components/Products'))
+const ToolSpace = React.lazy(() => import('./components/ToolSpace'))
+const OurProjects = React.lazy(() => import('./components/OurProjects'))
+const QuboAIPage = React.lazy(() => import('./components/QuboAI/QuboAIPage'))
 
 
 const App = () => {
@@ -109,27 +110,29 @@ const App = () => {
       <Navbar theme={showQuboAI ? 'dark' : theme} setTheme={setTheme} setShowProducts={setShowProducts} setShowContact={setShowContact} setShowToolSpace={setShowToolSpace} setShowOurProjects={setShowOurProjects} setShowQuboAI={setShowQuboAI} showQuboAI={showQuboAI} />
 
 
-      {showProducts ? (
-        <Products />
-      ) : showContact ? (
-        <ContactUs isPage={true} />
-      ) : showToolSpace ? (
-        <ToolSpace />
-      ) : showOurProjects ? (
-        <OurProjects />
-      ) : showQuboAI ? (
-        <QuboAIPage />
-      ) : (
+      <Suspense fallback={<div className="min-h-screen bg-black flex items-center justify-center text-white font-light tracking-widest">LOADING...</div>}>
+        {showProducts ? (
+          <Products />
+        ) : showContact ? (
+          <ContactUs isPage={true} />
+        ) : showToolSpace ? (
+          <ToolSpace />
+        ) : showOurProjects ? (
+          <OurProjects />
+        ) : showQuboAI ? (
+          <QuboAIPage />
+        ) : (
 
-        <>
-          <Hero />
-          <TrustedBy />
-          <Services />
-          <OurWork setShowOurProjects={setShowOurProjects} />
-          <Teams />
-          <ContactUs />
-        </>
-      )}
+          <>
+            <Hero />
+            <TrustedBy />
+            <Services />
+            <OurWork setShowOurProjects={setShowOurProjects} />
+            <Teams />
+            <ContactUs />
+          </>
+        )}
+      </Suspense>
 
       <Footer theme={theme} showQuboAI={showQuboAI} />
 

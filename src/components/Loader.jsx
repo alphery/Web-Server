@@ -14,6 +14,12 @@ const Loader = () => {
   ]
 
   useEffect(() => {
+    // Preload images for smooth animation
+    slides.forEach((slide) => {
+      const img = new Image()
+      img.src = slide.src
+    })
+
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length)
     }, 800) // Change slide every 0.8 seconds
