@@ -62,6 +62,8 @@ const Loader = () => {
               ease: [0.16, 1, 0.3, 1] // Apple-style ease-out
             }}
             className='slide-image'
+            width="1024"
+            height="1024"
           />
         </AnimatePresence>
       </div>
