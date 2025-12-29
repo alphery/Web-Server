@@ -21,7 +21,7 @@ function QuboAIPage() {
     }, []);
 
     return (
-        <div className="relative w-full h-screen bg-black text-white font-sans overflow-hidden">
+        <div className="relative w-full h-screen bg-black text-white overflow-hidden">
             {/* Background Gradient */}
             <div className="absolute inset-0 bg-gradient-to-b from-black via-[#050510] to-[#010115] pointer-events-none" />
 

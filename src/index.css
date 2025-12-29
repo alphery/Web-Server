@@ -1,5 +1,5 @@
-/* Premium Inter Font - Apple SF Pro Alternative */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+/* Manrope Font */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
 @import "tailwindcss";
 
@@ -7,11 +7,11 @@
 
 /* FORCE HIDE SCROLLBARS ON EVERYTHING */
 * {
-  /* Premium font stack - SF Pro on Apple devices, Inter elsewhere */
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Inter', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  /* Manrope font stack */
+  font-family: 'Manrope', sans-serif !important;
   font-weight: 400;
   /* Enable font feature settings for better readability */
-  font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  /* font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11'; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scrollbar-width: none !important;
@@ -58,6 +58,13 @@ body {
   --color-primary: #5044E5;
   --color-primary-light: #4d8cea;
   --gradient-primary: linear-gradient(to right, #5044E5, #4d8cea);
+
+  /* Force Tailwind fonts to Manrope */
+  --font-sans: "Manrope", sans-serif;
+  --font-serif: "Manrope", sans-serif;
+  --font-mono: "Manrope", sans-serif;
+  --font-display: "Manrope", sans-serif;
+  --font-body: "Manrope", sans-serif;
 }
 
 /* Glassmorphism Utilities */
